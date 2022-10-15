@@ -38,62 +38,75 @@ class _MyHomePageState extends State<MyHomePage>{
 
 
 
+
+
   @override
   Widget build(BuildContext context) {
    return Scaffold(
      appBar: AppBar(
-       title: const Text('Posts'),
+       title: const Text('Instagram'),
      ),
-     body: Visibility(
-       visible: isLoaded,
-       child: ListView.builder(
-           itemCount: posts?.length,
-           itemBuilder: (context,index){
 
-         return Container(
-           padding: const EdgeInsets.all(16),
+     body: Container(
+       height: 120,
+       child: Column(
 
-           child: Row(
-             children: [
-               Container(
-                 height: 50,
-                 width: 50,
-                 decoration:BoxDecoration(
-                   borderRadius: BorderRadius.circular(12),
-                   color: Colors.grey[300],
-                 ),
-               ),
-               SizedBox(width: 16),
 
-               
-               Expanded(
+         children: [
+
+
+           Expanded(
+
+             child: ListView.builder(
+
+               scrollDirection: Axis.horizontal,
+                 itemCount: posts?.length,
+                 itemBuilder: (context,index)
+                 {
+               return Container(
+                 padding: EdgeInsets.all(3),
+
                  child: Column(
-                   crossAxisAlignment: CrossAxisAlignment.start,
+
                    children: [
-                     
-                     Text(
-                       posts![index].title,
-                       maxLines: 2,
-                       style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),),
-                     
-                       Text(
-                         posts![index].body ?? '',
-                         maxLines: 3,
-                         style: TextStyle(
-                             fontSize: 15, fontWeight: FontWeight.bold),),
-                     
-                     
+                     ClipRRect(
+                       borderRadius: BorderRadius.circular(200),
+
+                       child: Image(
+                         image: NetworkImage(posts![index].body),
+                         height: 70,
+                         width: 70,
+                       ),
+                     ),
+
+                     SizedBox(width: 16),
+
+
+                     Expanded(
+                       child: Column(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         children: [
+
+                           Text(
+                             posts![index].title,
+                             maxLines: 2,
+                             style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
+                         ],
+                       ),
+                     ),
                    ],
                  ),
-               ),
-             ],
+               );
+
+             }),
            ),
-         );
-       }),
-       replacement: const Center(
-         child: CircularProgressIndicator(),
+           Text("data"),
+         ],
+
        ),
      ),
+
+
    );
   }
 
