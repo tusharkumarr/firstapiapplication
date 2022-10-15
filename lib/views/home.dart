@@ -21,16 +21,22 @@ class _MyHomePageState extends State<MyHomePage>{
 
     //fetch data from api
     getData();
+
   }
 
   getData() async{
-    posts=await RemoteSerives().getPosts();
+    posts=await RemoteSerives().getPosts("");
     if(posts!=null){
       setState(() {
         isLoaded=true;
+
+        var post= posts?.length;
+        print(" sucessfully");
       });
     }
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,19 +64,24 @@ class _MyHomePageState extends State<MyHomePage>{
                  ),
                ),
                SizedBox(width: 16),
+
                
                Expanded(
                  child: Column(
                    crossAxisAlignment: CrossAxisAlignment.start,
                    children: [
+                     
                      Text(
                        posts![index].title,
                        maxLines: 2,
                        style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),),
-                     Text(
-                       posts![index].body?? '',
-                       maxLines: 3,
-                       style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
+                     
+                       Text(
+                         posts![index].body ?? '',
+                         maxLines: 3,
+                         style: TextStyle(
+                             fontSize: 15, fontWeight: FontWeight.bold),),
+                     
                      
                    ],
                  ),
