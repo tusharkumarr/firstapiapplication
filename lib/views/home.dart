@@ -47,63 +47,130 @@ class _MyHomePageState extends State<MyHomePage>{
        title: const Text('Instagram'),
      ),
 
-     body: Container(
-       height: 120,
-       child: Column(
+     body: Column(
+       children: [
+
+         //stories of the useres
+         Container(
+           height: 120,
+           child: Column(
 
 
-         children: [
+             children: [
 
 
-           Expanded(
+               Expanded(
 
-             child: ListView.builder(
+                 child: ListView.builder(
 
-               scrollDirection: Axis.horizontal,
-                 itemCount: posts?.length,
-                 itemBuilder: (context,index)
-                 {
-               return Container(
-                 padding: EdgeInsets.all(3),
+                   scrollDirection: Axis.horizontal,
+                     itemCount: posts?.length,
+                     itemBuilder: (context,index)
+                     {
+                   return Container(
+                     padding: EdgeInsets.all(3),
 
-                 child: Column(
+                     child: Column(
 
-                   children: [
-                     ClipRRect(
-                       borderRadius: BorderRadius.circular(200),
+                       children: [
+                         ClipRRect(
+                           borderRadius: BorderRadius.circular(200),
 
-                       child: Image(
-                         image: NetworkImage(posts![index].body),
-                         height: 70,
-                         width: 70,
-                       ),
+                           child: Image(
+                             image: NetworkImage(posts![index].body),
+                             height: 70,
+                             width: 70,
+                           ),
+                         ),
+
+                         SizedBox(width: 16),
+
+
+                         Expanded(
+                           child: Column(
+                             crossAxisAlignment: CrossAxisAlignment.start,
+                             children: [
+
+                               Text(
+                                 posts![index].title,
+                                 maxLines: 2,
+                                 style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
+                             ],
+                           ),
+                         ),
+                       ],
                      ),
+                   );
 
-                     SizedBox(width: 16),
+                 }),
+               ),
+               Text("Latest Feeds"),
+
+             ],
+
+           ),
+         ),
+
+         // posts of the users
+         Expanded(
+
+           child: ListView.builder(
 
 
-                     Expanded(
-                       child: Column(
-                         crossAxisAlignment: CrossAxisAlignment.start,
+               itemCount: posts?.length,
+               itemBuilder: (context,index)
+               {
+                 return Container(
+                   height: 300,
+                   padding: EdgeInsets.all(20),
+
+                   child: Column(
+                     children: [
+                       Row(
                          children: [
+                           ClipRRect(
+                             borderRadius: BorderRadius.circular(200),
 
+
+                             child: Image(
+                               image: NetworkImage(posts![index].body),
+                               height: 30,
+                               width: 30,
+                             ),
+                           ),
                            Text(
                              posts![index].title,
                              maxLines: 2,
                              style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
+
+
+
+                           SizedBox(width: 16),
+
                          ],
                        ),
-                     ),
-                   ],
-                 ),
-               );
+                       ClipRRect(
 
-             }),
-           ),
-           Text("data"),
-         ],
 
-       ),
+
+                         child: Image(
+                           image: NetworkImage(posts![index].body),
+                           height: 200,
+                           width: 200,
+                         ),
+                       ),
+                       Text(
+                         posts![index].body,
+                         maxLines: 2,
+                         style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
+
+                     ],
+                   ),
+                 );
+
+               }),
+         ),
+       ],
      ),
 
 
